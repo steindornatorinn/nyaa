@@ -20,6 +20,8 @@ import (
 const (
 	// CookieName : Name of cookie
 	CookieName = "session"
+	// DomainName : The domain the cookie opeates on
+	DomainName = "pantsu.cat"
 	// UserContextKey : key for user context
 	UserContextKey = "user"
 )
@@ -58,6 +60,7 @@ func EncodeCookie(userID uint) (string, error) {
 func ClearCookie(w http.ResponseWriter) (int, error) {
 	cookie := &http.Cookie{
 		Name:     CookieName,
+		Domain:   DomainName,
 		Value:    "",
 		Path:     "/",
 		HttpOnly: true,
@@ -100,6 +103,7 @@ func SetCookieHandler(w http.ResponseWriter, r *http.Request, email string, pass
 	}
 	cookie := &http.Cookie{
 		Name:     CookieName,
+		Domain:   DomainName,
 		Value:    encoded,
 		Path:     "/",
 		HttpOnly: true,

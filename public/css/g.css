@@ -178,3 +178,7 @@ td.tr-le, .error-text { color: #E84C4C; }
 	color:white;
 	font-weight: bold;
 }
+
+.comment-box {
+	background-color: rgba(0,0,255,0.05);
+}

@@ -120,6 +120,7 @@
                     <h3>{{ if gt .User.ID 0}} {{call $.T "submit_a_comment_as_username" .User.Username}} {{else}} {{call $.T "submit_a_comment_as_anonymous"}} {{end}}</h3>
                     <textarea style="height: 10rem;" placeholder="サンキュー" name="comment" class="form-input up-input"></textarea>
                     </div>
+                    <p>{{call $.T "comment_styling"}} <a href="https://daringfireball.net/projects/markdown/basics">Markdown</a></p>
                     <div class="comment-captcha">
                 {{block "captcha" (makeCaptchaData .CaptchaID $.T)}}{{end}}
                 <button type="submit" class="form-input up-btn">{{call $.T "submit" }}</button>

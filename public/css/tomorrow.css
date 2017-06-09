@@ -166,3 +166,7 @@ td.tr-le, .error-text { color: #cc6666; }
 	color:white;
 	font-weight: bold;
 }
+
+.comment-box{
+	background-color: rgba(0,0,0,0.1);
+}

@@ -963,3 +963,7 @@ input.filelist-checkbox:checked + table.table-filelist {
 input.nav-btn {
 	cursor: pointer;
 }
+
+.comment-box {
+	background-color: rgba(0,0,0,0.05);
+}

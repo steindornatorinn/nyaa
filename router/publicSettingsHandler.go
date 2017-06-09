@@ -3,7 +3,7 @@ package router
 import (
 	"encoding/json"
 	"net/http"
-	"net/url"
+	//"net/url"
 
 	"github.com/NyaaPantsu/nyaa/config"
 	"github.com/NyaaPantsu/nyaa/service/user"
@@ -57,6 +57,9 @@ func ChangePublicSettingsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Language not available", http.StatusInternalServerError)
 		return
 	}
+
+	// test
+	/*
 	// FIXME Are the settings actually sanitized?
 	// Limit the mascot URL, so base64-encoded images aren't valid
 	if len(mascotURL) > 256 {
@@ -69,6 +72,7 @@ func ChangePublicSettingsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error parsing mascot URL: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
+	*/
 
 	// If logged in, update user settings.
 	user, _ := userService.CurrentUser(r)

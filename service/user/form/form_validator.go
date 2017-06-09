@@ -9,7 +9,7 @@ import (
 
 // Regex by: Philippe Verdy (in a comment somewhere on a website) - Valid every email RFC valid
 const emailRegex = `^((?:[-!#$%&'*+/=?^` + "`" + `{|}~\w]|\\.)+(?:\.(?:[-!#$%&'*+/=?^` + "`" + `{|}~\w]|\\.)+)*|"(?:[^\\"]|\\.)+")@(?:\[(?:((?:(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?)\.){3}(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?))|IPv6:((?:[0-9A-F]{1,4}:){7}[0-9A-F]{1,4}|(?:[0-9A-F]{1,4}:){6}:[0-9A-F]{1,4}|(?:[0-9A-F]{1,4}:){5}:(?:[0-9A-F]{1,4}:)?[0-9A-F]{1,4}|(?:[0-9A-F]{1,4}:){4}:(?:[0-9A-F]{1,4}:){0,2}[0-9A-F]{1,4}|(?:[0-9A-F]{1,4}:){3}:(?:[0-9A-F]{1,4}:){0,3}[0-9A-F]{1,4}|(?:[0-9A-F]{1,4}:){2}:(?:[0-9A-F]{1,4}:){0,4}[0-9A-F]{1,4}|[0-9A-F]{1,4}::(?:[0-9A-F]{1,4}:){0,5}[0-9A-F]{1,4}|::(?:[0-9A-F]{1,4}:){0,6}[0-9A-F]{1,4}|(?:[0-9A-F]{1,4}:){1,7}:|(?:[0-9A-F]{1,4}:){6}(?:(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?)\.){3}(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?)|(?:[0-9A-F]{1,4}:){0,5}:(?:(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?)\.){3}(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?)|::(?:[0-9A-F]{1,4}:){0,5}(?:(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?)\.){3}(?:[01][\d]{0,2}|2(?:[0-4]\d?|5[0-5]?|[6-9])?|[3-9]\d?))|([-a-z\d]{0,62}[a-z\d]:[^\[\\\]]+))\]|([a-z\d](?:[-a-z\d]{0,62}[a-z\d])?(?:\.[a-z\d](?:[-a-z\d]{0,62}[a-z\d])?)+))$`
-const usernameRegex = `(\W)`
+const usernameRegex = `(^\w-)`
 
 // EmailValidation : Check if an email is valid
 func EmailValidation(email string, mes *msg.Messages) bool {
@@ -28,7 +28,22 @@ func ValidateUsername(username string, mes *msg.Messages) bool {
 	exp, errorRegex := regexp.Compile(usernameRegex)
 	if regexpCompiled := log.CheckError(errorRegex); regexpCompiled {
 		if exp.MatchString(username) {
-			mes.AddError("username", "Username contains illegal characters")
+			mes.AddError("username", "username contains illegal characters, allowed characters are letters, numbers, - and _")
+			return false
+		}
+	} else {
+		return false
+	}
+	return true
+}
+
+// ValidatePassword : Check if a username is valid
+func ValidatePassword(password string, mes *msg.Messages) bool {
+	// We just reuse the same regex for usernames
+	exp, errorRegex := regexp.Compile(usernameRegex)
+	if regexpCompiled := log.CheckError(errorRegex); regexpCompiled {
+		if exp.MatchString(password) {
+			mes.AddError("password", "Password contains illegal characters, allowed characters are letters, numbers, - and _")
 			return false
 		}
 	} else {

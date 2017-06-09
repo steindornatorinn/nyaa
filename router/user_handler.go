@@ -218,6 +218,7 @@ func UserRegisterPostHandler(w http.ResponseWriter, r *http.Request) {
 			form.EmailValidation(r.PostFormValue("email"), messages)
 		}
 		form.ValidateUsername(r.PostFormValue("username"), messages)
+		//form.ValidatePassword(r.PostFormValue("password"), messages)
 		if !messages.HasErrors() {
 			modelHelper.BindValueForm(&b, r)
 			modelHelper.ValidateForm(&b, messages)

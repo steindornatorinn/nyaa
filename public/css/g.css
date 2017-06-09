@@ -180,5 +180,6 @@ td.tr-le, .error-text { color: #E84C4C; }
 }
 
 .comment-box {
-	background-color: rgba(0,0,255,0.05);
+	/* Set to a solid color to remove transparency, equivilent to adding a 5% transparent layer of blue over the color*/
+	background-color: #E5EBFC;
 }
